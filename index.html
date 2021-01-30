@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <label for="currentPrice">aktualna cema btc</label>
+        <input id="currentPrice" name="currentPrice" type="number" step="0.01">
+    </div>
+    <div>
+        <label for="limit">limit</label>
+        <input id="limit" name="limit" type="number" step="0.01">
+    </div>
+    <div>
+        <label for="targetProfit">profit</label>
+        <input id="targetProfit" type="number" step="0.01">
+    </div>
+
+    <div>
+        <label for="fee">fee</label>
+        <input id="fee" type="number" step="0.0001">
+    </div>
+
+    <div>
+        <P>buy price</P>
+        <p id="buyPrice"></p>
+    </div>
+    <div>
+        <P>sell price</P>
+        <p id="sellPrice"></p>
+    </div>
+    <div>
+        <P>spread</P>
+        <p id="spread"></p>
+    </div>
+
+    <script>
+        document.addEventListener('input', function() {
+            let currentPrice = Number.parseFloat(document.getElementById('currentPrice').value);
+            let targetProfit = Number.parseFloat(document.getElementById('targetProfit').value);
+            let feePercent = Number.parseFloat(document.getElementById('fee').value);
+            let limit = Number.parseFloat(document.getElementById('limit').value);
+
+            let cryptoSize = limit / currentPrice;
+
+            let buyFee = limit * feePercent;
+            let actualBuy = limit - buyFee - targetProfit * 0.5;
+            let buyPrice = Math.fround(actualBuy / cryptoSize);
+
+            let sellLimit = limit + targetProfit * 0.5;
+            let sellFee = sellLimit * feePercent;
+            let actualSell = sellLimit + sellFee;
+            let sellPrice = actualSell / cryptoSize;
+
+            let spread = sellPrice - buyPrice;
+
+            document.getElementById('buyPrice').innerText = buyPrice;
+            document.getElementById('sellPrice').innerText = sellPrice;
+            document.getElementById('spread').innerText = spread;
+        })
+    </script>
+</body>
+</html>
