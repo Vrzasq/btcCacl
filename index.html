@@ -33,6 +33,10 @@
         <p id="sellPrice"></p>
     </div>
     <div>
+        <P>crypto</P>
+        <p id="crypto"></p>
+    </div>
+    <div>
         <P>spread</P>
         <p id="spread"></p>
     </div>
@@ -46,20 +50,14 @@
 
             let cryptoSize = limit / currentPrice;
 
-            let buyFee = limit * feePercent;
-            let actualBuy = limit - buyFee - targetProfit * 0.5;
-            let buyPrice = Math.fround(actualBuy / cryptoSize);
-
-            let sellLimit = limit + targetProfit * 0.5;
-            let sellFee = sellLimit * feePercent;
-            let actualSell = sellLimit + sellFee;
-            let sellPrice = actualSell / cryptoSize;
-
+            let buyPrice = Math.fround(currentPrice + currentPrice * cryptoSize + currentPrice * targetProfit * 0.5);
+            let sellPrice =  Math.fround(currentPrice - currentPrice * cryptoSize - currentPrice * targetProfit * 0.5);
             let spread = sellPrice - buyPrice;
 
             document.getElementById('buyPrice').innerText = buyPrice;
             document.getElementById('sellPrice').innerText = sellPrice;
             document.getElementById('spread').innerText = spread;
+            document.getElementById('crypto').innerText = cryptoSize;
         })
     </script>
 </body>
