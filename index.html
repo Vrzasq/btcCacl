@@ -50,8 +50,8 @@
 
             let cryptoSize = limit / currentPrice;
 
-            let buyPrice = Math.fround(currentPrice + currentPrice * cryptoSize + currentPrice * targetProfit * 0.5);
-            let sellPrice =  Math.fround(currentPrice - currentPrice * cryptoSize - currentPrice * targetProfit * 0.5);
+            let buyPrice = Math.fround(currentPrice + currentPrice * feePercent + currentPrice * targetProfit * 0.5);
+            let sellPrice =  Math.fround(currentPrice - currentPrice * feePercent - currentPrice * targetProfit * 0.5);
             let spread = sellPrice - buyPrice;
 
             document.getElementById('buyPrice').innerText = buyPrice;
